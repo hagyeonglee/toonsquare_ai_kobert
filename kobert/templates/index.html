@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <title>Multi-Emotion Classifier</title>
+  <script src="/static/Chart.min.js"></script>
+  <style>
+  table {
+    width: 40%;
+  }
+  </style>
+</head>
+
+<body>
+  <form action="/">
+    <div id="classifier">
+      <br>
+      <p>Enter a Sentence:</p>
+
+      <center>
+        <input align="center" type="text" name="sentence" maxlength="500" placeholder="enter sentence here" required>
+      </center>
+      <br>
+
+      <center>
+        <button id="btn-submit" type="submit" value="Submit" align="center">Submit</button>
+      </center>
+
+      <br>
+
+      <p>
+        {{ sentence }} 
+        <br>
+        <br>
+    </div>
+  </div>
+  <div id="table">
+    <p>
+      <center>
+      <table>      
+        <tbody>    
+          <tr>
+            <th>Emotion</th>
+            {% for k in result.keys() %}
+              <td>{{ k }}</td>
+            {% endfor %}
+          </tr>
+          <tr>
+            <th>Probability</th>
+            {% for v in result.values() %}
+              <td>{{ (v*100)|round(2)|string }}%</td>
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table> 
+      </center>
+    </p>
+    </div>
+    <div id="barplot">
+      <center>
+      <canvas id="EmotionChart" width="340" height="340"></canvas>
+      <script>
+        var mychart = document.getElementById("EmotionChart");
+        var EmotionChart = new Chart(mychart, {
+            type: 'horizontalBar',
+            data: {
+              labels : [
+                {% for k in sorted_result.keys() %}
+                  "{{ k }}",
+                {% endfor %}],
+              datasets : [{
+                  fillColor : "rgb(173,125,205)",
+                  strokeColor: "rgb(173,125,205)",
+                  pointColor: "rgb(170,72,205)",
+                  backgroundColor: 'rgb(98,179,141)',
+                  label: "softmax",
+                  data : [
+                    {% for v in sorted_result.values() %}
+                      {{ v }},
+                    {% endfor %}]
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+    </center>
+  </div>
+  </form>
+</body>
+
+</html>

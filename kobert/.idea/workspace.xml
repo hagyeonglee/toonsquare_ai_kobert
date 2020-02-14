@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="66c4f529-968b-4bb7-8f09-34e88bc16929" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1XEzq9zUNyIEfmnpcGmz0x6qkez" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\내 드라이브\pytorch-bert-korean" />
+      <recent name="G:\내 드라이브\pytorch-bert-korean\data" />
+      <recent name="G:\내 드라이브\pytorch-bert-korean\best_model" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="pytorch-bert-korean" type="PythonConfigurationType" factoryName="Python">
+      <module name="pytorch-bert-korean" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\lhky0\PycharmProjects\BERT\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="G:\내 드라이브\pytorch-bert-korean\flask.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="66c4f529-968b-4bb7-8f09-34e88bc16929" name="Default Changelist" comment="" />
+      <created>1580626229639</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1580626229639</updated>
+      <workItem from="1580626233132" duration="143000" />
+      <workItem from="1580626479709" duration="7926000" />
+      <workItem from="1580691021710" duration="4555000" />
+      <workItem from="1580710673885" duration="10616000" />
+      <workItem from="1580778725078" duration="20840000" />
+      <workItem from="1580876999742" duration="9938000" />
+      <workItem from="1580912045294" duration="7885000" />
+      <workItem from="1580950835263" duration="10990000" />
+      <workItem from="1581041819959" duration="3955000" />
+      <workItem from="1581050785552" duration="450000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580918537248">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1580918537248" />
+    <state x="684" y="281" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1580976527509">
+      <screen x="83" y="0" width="1837" height="1080" />
+    </state>
+    <state x="503" y="215" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1580639099380" />
+    <state x="547" y="225" key="#com.intellij.fileTypes.FileTypeChooser/66.0.1470.864/1920.0.1858.1080@66.0.1470.864" timestamp="1580722741478" />
+    <state x="684" y="281" key="#com.intellij.fileTypes.FileTypeChooser/83.0.1837.1080@83.0.1837.1080" timestamp="1580976527509" />
+    <state x="723" y="287" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1580877050647">
+      <screen x="66" y="0" width="1854" height="1080" />
+    </state>
+    <state x="723" y="287" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/66.0.1854.1080@66.0.1854.1080" timestamp="1580877050647" />
+    <state x="468" y="299" key="FileChooserDialogImpl" timestamp="1581041887811">
+      <screen x="70" y="0" width="1850" height="1080" />
+    </state>
+    <state x="468" y="299" key="FileChooserDialogImpl/70.0.1850.1080@70.0.1850.1080" timestamp="1581041887811" />
+    <state x="623" y="311" key="com.intellij.ide.util.TipDialog" timestamp="1581050786548">
+      <screen x="70" y="0" width="1850" height="1080" />
+    </state>
+    <state x="459" y="237" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1982.0.1858.1080@0.0.1536.824" timestamp="1580950836551" />
+    <state x="459" y="237" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1580912046443" />
+    <state x="574" y="299" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580691022657" />
+    <state x="505" y="248" key="com.intellij.ide.util.TipDialog/66.0.1470.864/1920.0.1858.1080@66.0.1470.864" timestamp="1580778725859" />
+    <state x="620" y="310" key="com.intellij.ide.util.TipDialog/66.0.1854.1080@66.0.1854.1080" timestamp="1580877000789" />
+    <state x="623" y="311" key="com.intellij.ide.util.TipDialog/70.0.1850.1080@70.0.1850.1080" timestamp="1581050786548" />
+    <state x="695" y="136" width="613" height="807" key="find.popup" timestamp="1580977306847">
+      <screen x="83" y="0" width="1837" height="1080" />
+    </state>
+    <state x="695" y="136" width="613" height="807" key="find.popup/83.0.1837.1080@83.0.1837.1080" timestamp="1580977306847" />
+    <state x="598" y="190" width="804" height="889" key="search.everywhere.popup" timestamp="1580976856699">
+      <screen x="83" y="0" width="1837" height="1080" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1580631227736" />
+    <state x="598" y="190" width="804" height="889" key="search.everywhere.popup/83.0.1837.1080@83.0.1837.1080" timestamp="1580976856699" />
+  </component>
+</project>
