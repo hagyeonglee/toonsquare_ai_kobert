@@ -9,7 +9,7 @@ import torch
 pretrained_model_path = './best_model/best_model.bin'
 config_path = './best_model/bert_config.json'
 
-pretrained = torch.load(pretrained_model_path)
+pretrained = torch.load(pretrained_model_path,map_location='cpu')
 bert_config = BertConfig(config_path)
 bert_config.num_labels = 7
 
@@ -34,16 +34,16 @@ def get_prediction(sentence):
 
     output = model(torch.tensor(sentence).unsqueeze(0))
     output_softmax = softmax(output)[0]
-    max_out = label_list[output_softmax.argmax()]
+    max_out = emotion[output_softmax.argmax()]
     argidx = output_softmax.argsort(descending=True)
-    result = {label_list[i]: round(output_softmax[i].item(), 3) for i in range(len(label_list))}
-    sorted_result = {label_list[i]: round(output_softmax[i].item(), 3) for i in argidx}
+    result = {emotion[i]: round(output_softmax[i].item(), 3) for i in range(len(emotion))}
+    sorted_result = {emotion[i]: round(output_softmax[i].item(), 3) for i in argidx}
     return max_out, result, sorted_result
 
 
 app = Flask(__name__)
 # app._static_folder = './static'
-run_with_ngrok(app)  ##colab 환경에서 실행할 때
+run_with_ngrok(app)
 
 
 @app.route('/')
@@ -63,4 +63,4 @@ def post():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0',port=80)
