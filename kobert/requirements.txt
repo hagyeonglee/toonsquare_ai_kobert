@@ -9,7 +9,7 @@ chardet
 Click
 decorator
 defusedxml
-docutils
+docutils==0.14
 entrypoints
 Flask
 flask_ngrok
@@ -81,5 +81,5 @@ wcwidth
 webencodings
 Werkzeug
 widgetsnbextension
-wrapt
+wrapt==1.11.*
 zipp
