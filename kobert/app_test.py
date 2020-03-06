@@ -42,9 +42,6 @@ def get_prediction(sentence):
 
 
 app = Flask(__name__)
-# app._static_folder = './static'
-run_with_ngrok(app)
-
 
 @app.route('/')
 def test():
