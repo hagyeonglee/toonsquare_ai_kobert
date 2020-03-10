@@ -9,7 +9,7 @@ import torch
 pretrained_model_path = './best_model/best_model.bin'
 config_path = './best_model/bert_config.json'
 
-pretrained = torch.load(pretrained_model_path,map_location='cpu')
+pretrained = torch.load(pretrained_model_path, map_location='cpu')
 bert_config = BertConfig(config_path)
 bert_config.num_labels = 7
 
@@ -43,6 +43,7 @@ def get_prediction(sentence):
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def test():
     return render_template('post.html')
@@ -60,5 +61,4 @@ def post():
 
 
 if __name__ == '__main__':
-    app.run(port=3000)
-#host='0.0.0.0',port=80
+    app.run(host='0.0.0.0', port=3000)
