@@ -12,6 +12,7 @@ RUN git clone https://github.com/NVIDIA/apex.git && cd apex && python setup.py i
 RUN git config --global url."https://83641c24057c7cc1e8c39c2a1460c66819cdbf32@github.com/".insteadOf "https://github.com/"
 RUN mkdir /app
 RUN git clone "https://github.com/lhky78/toonsquare_ai_kobert.git" /app
+RUN cd /app/toonsquare_ai_kobert && git fetch
 EXPOSE 3000 3000
 CMD cd /app/toonsquare_ai_kobert/kobert && git pull --rebase && python app_azure_test.py
 #CMD ["python", "app_azure_test.py"]
