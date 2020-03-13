@@ -13,3 +13,5 @@ RUN cd /root/deploy/toonsquare_ai_kobert && git fetch
 EXPOSE 3000 3000
 CMD cd /root/deploy/toonsquare_ai_kobert/kobert && git pull --rebase && python app_azure_test.py
 #CMD ["python", "app_azure_test.py"]
+
+
