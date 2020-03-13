@@ -83,3 +83,5 @@ Werkzeug
 widgetsnbextension
 wrapt==1.11.*
 zipp
+azure
+konlpy
