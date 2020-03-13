@@ -25,7 +25,7 @@ import warnings
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from util import constant
-from util import functions as fc
+from util import function as fc
 
 REAL_PATH = os.path.realpath(__file__)
 DIRNAME = os.path.dirname(REAL_PATH)

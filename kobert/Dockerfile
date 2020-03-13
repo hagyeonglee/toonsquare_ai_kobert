@@ -1,9 +1,6 @@
 FROM pytorch/pytorch:1.2-cuda10.0-cudnn7-devel
 USER root
 MAINTAINER lhky0708@gmail.com
-ENV LANG ko_KR.utf8
-ENV LANGUAGE ko_KR.utf8
-ENV LC_ALL ko_KR.utf8
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 RUN pip install pytorch_transformers flask pandas
 RUN pip install -U protobuf

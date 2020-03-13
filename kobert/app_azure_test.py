@@ -20,9 +20,6 @@ from util import constant
 
 from azure.storage.file import FileService
 
-AZURE_STORAGE_ACCOUNT = constant.STORAGE_ACCOUNT_NAME
-AZURE_STORAGE_KEY = constant.STORAGE_ACCOUNT_KEY
-
 REAL_PATH = os.path.realpath(__file__)
 DIRNAME = os.path.dirname(REAL_PATH)
 
@@ -33,25 +30,23 @@ CONFIG_FILE_ABS_PATH = os.path.join(DIRNAME, constant.BERT_CONFIG_NAME)
 
 
 try:
-    TOONSTORY_ENV = os.environ['TOONSTORY_ENV']
+    AZURE_STORAGE_ACCOUNT_NAME = os.environ['AZURE_STORAGE_ACCOUNT_NAME']
+    AZURE_STORAGE_ACCOUNT_KEY = os.environ['AZURE_STORAGE_ACCOUNT_KEY']
+    AZURE_STORAGE_NAME = os.environ['AZURE_STORAGE_NAME']
 except KeyError:
-    TOONSTORY_ENV ="development"
-finally:
-    if TOONSTORY_ENV == constant.PRODUCTION:
-        logging.basicConfig(level=logging.CRITICAL)
-    else:
-        logging.basicConfig(level=logging.DEBUG)
-    logger = logging.getLogger(__name__)
+    AZURE_STORAGE_ACCOUNT_NAME ="check Account name"
+    AZURE_STORAGE_ACCOUNT_KEY = "check Account key"
+    AZURE_STORAGE_NAME = "check storage name"
 
 #model, config files download and unzip
 try:
-    FILE_SERVICE = FileService(account_name=AZURE_STORAGE_ACCOUNT, account_key=AZURE_STORAGE_KEY)
+    FILE_SERVICE = FileService(account_name=AZURE_STORAGE_ACCOUNT_NAME, account_key=AZURE_STORAGE_ACCOUNT_KEY)
     logger.debug("MODEL_ABS_PATH : %s", MODEL_ABS_PATH)
     if os.path.exists(MODEL_ABS_PATH):
         shutil.rmtree(MODEL_ABS_PATH)
 
-    FILE_SERVICE.get_file_to_path(constant.STORAGE_NAME, constant.STORAGE_BERT_SENTIMENT_DIR, constant.MODEL_ZIP_NAME, MODEL_ZIP_ABS_PATH)
-    FILE_SERVICE.get_file_to_path(constant.STORAGE_NAME, constant.STORAGE_BERT_SENTIMENT_DIR, constant.BERT_CONFIG_NAME, CONFIG_FILE_ABS_PATH)
+    FILE_SERVICE.get_file_to_path(AZURE_STORAGE_NAME, constant.STORAGE_BERT_SENTIMENT_DIR, constant.MODEL_ZIP_NAME, MODEL_ZIP_ABS_PATH)
+    FILE_SERVICE.get_file_to_path(AZURE_STORAGE_NAME, constant.STORAGE_BERT_SENTIMENT_DIR, constant.BERT_CONFIG_NAME, CONFIG_FILE_ABS_PATH)
     shutil.unpack_archive(MODEL_ZIP_ABS_PATH, extract_dir=DIRNAME)
 
 except Exception as e:
