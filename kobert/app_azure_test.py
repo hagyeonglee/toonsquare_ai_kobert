@@ -6,7 +6,7 @@ from pytorch_transformers.modeling_bert import BertConfig
 import numpy as np
 import torch
 
-from flask_ngrok import run_with_ngrok
+# from flask_ngrok import run_with_ngrok
 
 import sys
 import shutil
