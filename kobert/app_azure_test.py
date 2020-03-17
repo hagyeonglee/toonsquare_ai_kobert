@@ -28,7 +28,6 @@ MODEL_ZIP_ABS_PATH        = os.path.join(DIRNAME, constant.MODEL_ZIP_NAME)
 
 CONFIG_FILE_ABS_PATH = os.path.join(DIRNAME, constant.BERT_CONFIG_NAME)
 
-
 try:
     AZURE_STORAGE_ACCOUNT_NAME = os.environ['AZURE_STORAGE_ACCOUNT_NAME']
     AZURE_STORAGE_ACCOUNT_KEY = os.environ['AZURE_STORAGE_ACCOUNT_KEY']
@@ -41,7 +40,7 @@ except KeyError:
 #model, config files download and unzip
 try:
     FILE_SERVICE = FileService(account_name=AZURE_STORAGE_ACCOUNT_NAME, account_key=AZURE_STORAGE_ACCOUNT_KEY)
-    logger.debug("MODEL_ABS_PATH : %s", MODEL_ABS_PATH)
+    logging.debug("MODEL_ABS_PATH : %s", MODEL_ABS_PATH)
     if os.path.exists(MODEL_ABS_PATH):
         shutil.rmtree(MODEL_ABS_PATH)
 
@@ -50,7 +49,7 @@ try:
     shutil.unpack_archive(MODEL_ZIP_ABS_PATH, extract_dir=DIRNAME)
 
 except Exception as e:
-    logger.critical("Unexpected error : %s", e)
+    logging.critical("Unexpected error : %s", e)
     sys.exit()
 
 # print(DIRNAME)
