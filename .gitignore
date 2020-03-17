@@ -81,3 +81,6 @@ fabric.properties
 .idea/modules.xml
 .idea/toonsquare_ai_kobert_fork.iml
 .idea/vcs.xml
+
+#env
+/azure-variables.env
