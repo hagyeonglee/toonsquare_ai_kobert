@@ -12,7 +12,7 @@ defusedxml
 docutils==0.14
 entrypoints
 Flask
-flask_ngrok
+Flask-CORS
 idna
 importlib-metadata
 ipykernel

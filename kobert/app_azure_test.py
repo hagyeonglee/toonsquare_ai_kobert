@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request, render_template
+from flask_cors import CORS
 from model import BertForEmotionClassification
 from datasets import get_pretrained_model, Datasets
 from pytorch_transformers.modeling_bert import BertConfig
-
 import numpy as np
 import torch
 
@@ -92,7 +92,7 @@ def get_prediction(sentence):
 
 
 app = Flask(__name__)
-# run_with_ngrok(app)
+CORS(app)
 
 @app.route('/')
 def test():

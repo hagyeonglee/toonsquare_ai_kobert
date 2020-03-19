@@ -83,4 +83,4 @@ fabric.properties
 .idea/vcs.xml
 
 #env
-/azure-variables.env
+/.env
