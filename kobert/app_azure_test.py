@@ -92,7 +92,14 @@ def get_prediction(sentence):
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, allow_headers=['x-requested-with'], origins='*', methods='POST, GET, PUT, DELETE, OPTIONS')
+
+# def add_cors_header(response):
+#     response.headers['Access-Control-Allow-Origin'] = '*'
+#     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
+#     response.headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'
+#     return response
+# app.after_response(add_cors_header)
 
 @app.route('/')
 def test():
