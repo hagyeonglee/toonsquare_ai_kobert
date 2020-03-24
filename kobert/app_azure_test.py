@@ -74,7 +74,7 @@ tokenizer, vocab = get_pretrained_model('etri')
 # '공포', '놀람', '분노', '슬픔', '중립', '행복', '혐오'
 # 'angry', 'surprise', 'angry', 'sadness', 'neutral', 'joy', 'disgust'
 obj = dict()
-emotion = ['scare', 'surprise', 'angry', 'sadness', 'neutral', 'joy', 'disgust']
+emotion = ['scare', 'surprise', 'angry', 'sad', 'neutral', 'joy', 'disgust']
 
 def get_prediction(sentence):
     sentence = Datasets.normalize_string(sentence)
