@@ -101,11 +101,8 @@ CORS(app, allow_headers=['x-requested-with'], origins='*', methods='POST, GET, P
 #     return response
 # app.after_response(add_cors_header)
 
-@app.route('/')
-def test():
-    return render_template('post.html')
 
-@app.route('/post', methods=['POST'])
+@app.route('/', methods=['POST'])
 def post():
     sentence = request.form['input']
     max_out, result, sorted_result = get_prediction(sentence)
@@ -114,6 +111,7 @@ def post():
         'data': result
     }
     return obj
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000)
