@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request, render_template
-from flask_cors import CORS
 from model import BertForEmotionClassification
 from datasets import get_pretrained_model, Datasets
 from pytorch_transformers.modeling_bert import BertConfig
+from flask_cors import CORS
 import numpy as np
 import torch
 
@@ -13,6 +13,13 @@ import shutil
 import os
 import logging
 import utils
+
+# papago api
+import os
+import sys
+import urllib.request
+import json
+from pypapago import Translator
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -97,25 +104,50 @@ def get_prediction(sentence):
 
 app = Flask(__name__)
 CORS(app, allow_headers=['x-requested-with'], origins='*', methods='POST, GET, PUT, DELETE, OPTIONS')
-
-# def add_cors_header(response):
-#     response.headers['Access-Control-Allow-Origin'] = '*'
-#     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
-#     response.headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'
-#     return response
-# app.after_response(add_cors_header)
-
+app.config['JSON_AS_ASCII'] = False
+# app._static_folder = './static'
+# run_with_ngrok(app)
 
 @app.route('/', methods=['POST'])
 def post():
-    sentence = request.form['input']
-    max_out, result, sorted_result = get_prediction(sentence)
+    if request.method == 'POST':
+        sentence = request.form['input']
+        #
+        translator = Translator()
+        encQuery = urllib.parse.quote(sentence)
+        data = "query=" + encQuery
+        url = "https://openapi.naver.com/v1/papago/detectLangs"
+        re_quest = urllib.request.Request(url)
+        re_quest.add_header("X-Naver-Client-Id",PAPAGO_API_ID)
+        re_quest.add_header("X-Naver-Client-Secret",PAPAGO_API_SECRET)
+        response = urllib.request.urlopen(re_quest, data=data.encode("utf-8"))
+        rescode = response.getcode()
+
+        if(rescode==200):
+            response_body = response.read()
+            json_data = response_body.decode('utf-8')
+            json_dict = json.loads(json_data)
+            langCode = json_dict['langCode']
+            # print(json_data)
+            # print(json_dict)
+            logging.info(langCode)
+
+        else:
+            logging.info("Error Code:" + rescode)
+
+
+        forTranslateString = sentence
+        trans_result = translator.translate(forTranslateString, source=langCode, target='ko', verbose=False)
+        # print(trans_result) # 번역된 텍스트 출력
+        #
+    max_out, result, sorted_result = get_prediction(trans_result)
     obj['prediction'] = {
+        # 'sentence': sentence,
+        # 'story' : trans_result,
         'emotion': max_out,
         'data': result
     }
     return obj
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000)
