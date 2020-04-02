@@ -46,10 +46,8 @@ try:
     if os.path.exists(MODEL_ABS_PATH):
         shutil.rmtree(MODEL_ABS_PATH)
 
-    FILE_SERVICE.get_file_to_path(AZURE_STORAGE_NAME, constant.STORAGE_BERT_SENTIMENT_DIR, constant.MODEL_ZIP_NAME,
-                                  MODEL_ZIP_ABS_PATH)
-    FILE_SERVICE.get_file_to_path(AZURE_STORAGE_NAME, constant.STORAGE_BERT_SENTIMENT_DIR, constant.BERT_CONFIG_NAME,
-                                  CONFIG_FILE_ABS_PATH)
+    FILE_SERVICE.get_file_to_path(AZURE_STORAGE_NAME, constant.STORAGE_BERT_SENTIMENT_DIR, constant.MODEL_ZIP_NAME, MODEL_ZIP_ABS_PATH)
+    FILE_SERVICE.get_file_to_path(AZURE_STORAGE_NAME, constant.STORAGE_BERT_SENTIMENT_DIR, constant.BERT_CONFIG_NAME, CONFIG_FILE_ABS_PATH)
     shutil.unpack_archive(MODEL_ZIP_ABS_PATH, extract_dir=DIRNAME)
 
 except Exception as e:

@@ -15,7 +15,7 @@ except KeyError:
 def detector(sentence):
     encQuery = urllib.parse.quote(sentence)
     data = "query=" + encQuery
-    url= "https://naveropenapi.apigw.ntruss.com/langs/v1/dect"
+    url = "https://naveropenapi.apigw.ntruss.com/langs/v1/dect"
     request = urllib.request.Request(url)
     request.add_header("X-NCP-APIGW-API-KEY-ID",PAPAGO_API_ID)
     request.add_header("X-NCP-APIGW-API-KEY",PAPAGO_API_SECRET)

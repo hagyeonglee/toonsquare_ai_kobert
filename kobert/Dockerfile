@@ -17,5 +17,3 @@ EXPOSE 3000 3000
 #CMD cd /app/kobert && git pull --rebase && python app_azure_test.py
 CMD cd /app/kobert && git pull --rebase && python app_translator_test.py
 #CMD ["python", "app_azure_test.py"]
-
-
