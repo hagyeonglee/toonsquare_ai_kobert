@@ -85,4 +85,4 @@ wrapt==1.11.*
 zipp
 azure
 konlpy
-pypapago
+protobuf

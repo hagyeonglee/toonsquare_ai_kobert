@@ -15,15 +15,15 @@ import logging
 import utils
 
 # papago api
-import os
-import sys
 import urllib.request
 import json
-from pypapago import Translator
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from util import constant
+
+import detector
+import translator
 
 from azure.storage.file import FileService
 
@@ -105,44 +105,16 @@ def get_prediction(sentence):
 app = Flask(__name__)
 CORS(app, allow_headers=['x-requested-with'], origins='*', methods='POST, GET, PUT, DELETE, OPTIONS')
 app.config['JSON_AS_ASCII'] = False
-# app._static_folder = './static'
-# run_with_ngrok(app)
 
 @app.route('/', methods=['POST'])
 def post():
-    if request.method == 'POST':
-        sentence = request.form['input']
-        #
-        translator = Translator()
-        encQuery = urllib.parse.quote(sentence)
-        data = "query=" + encQuery
-        url = "https://openapi.naver.com/v1/papago/detectLangs"
-        re_quest = urllib.request.Request(url)
-        re_quest.add_header("X-Naver-Client-Id",PAPAGO_API_ID)
-        re_quest.add_header("X-Naver-Client-Secret",PAPAGO_API_SECRET)
-        response = urllib.request.urlopen(re_quest, data=data.encode("utf-8"))
-        rescode = response.getcode()
-
-        if(rescode==200):
-            response_body = response.read()
-            json_data = response_body.decode('utf-8')
-            json_dict = json.loads(json_data)
-            langCode = json_dict['langCode']
-            # print(json_data)
-            # print(json_dict)
-            logging.info(langCode)
-
-        else:
-            logging.info("Error Code:" + rescode)
-
-
-        forTranslateString = sentence
-        trans_result = translator.translate(forTranslateString, source=langCode, target='ko', verbose=False)
-        # print(trans_result) # 번역된 텍스트 출력
-        #
+    sentence = request.form['input']
+    # langCode = detector.detector(sentence)
+    trans_result = translator.translator(sentence)
     max_out, result, sorted_result = get_prediction(trans_result)
     obj['prediction'] = {
         # 'sentence': sentence,
+        # 'langCode' : langCode,
         # 'story' : trans_result,
         'emotion': max_out,
         'data': result
