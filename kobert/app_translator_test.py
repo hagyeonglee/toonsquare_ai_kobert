@@ -3,26 +3,17 @@ from model import BertForEmotionClassification
 from datasets import get_pretrained_model, Datasets
 from pytorch_transformers.modeling_bert import BertConfig
 from flask_cors import CORS
-import numpy as np
 import torch
-
-# from flask_ngrok import run_with_ngrok
 
 import sys
 import shutil
 import os
 import logging
-import utils
-
-# papago api
-import urllib.request
-import json
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from util import constant
 
-import detector
 import translator
 
 from azure.storage.file import FileService
@@ -30,8 +21,8 @@ from azure.storage.file import FileService
 REAL_PATH = os.path.realpath(__file__)
 DIRNAME = os.path.dirname(REAL_PATH)
 
-MODEL_ABS_PATH        = os.path.join(DIRNAME, constant.MODEL_DIR_PATH)
-MODEL_ZIP_ABS_PATH        = os.path.join(DIRNAME, constant.MODEL_ZIP_NAME)
+MODEL_ABS_PATH = os.path.join(DIRNAME, constant.MODEL_DIR_PATH)
+MODEL_ZIP_ABS_PATH = os.path.join(DIRNAME, constant.MODEL_ZIP_NAME)
 
 CONFIG_FILE_ABS_PATH = os.path.join(DIRNAME, constant.BERT_CONFIG_NAME)
 
@@ -42,21 +33,23 @@ try:
     PAPAGO_API_ID = os.environ['PAPAGO_API_ID']
     PAPAGO_API_SECRET = os.environ['PAPAGO_API_SECRET']
 except KeyError:
-    AZURE_STORAGE_ACCOUNT_NAME ="check Account name"
+    AZURE_STORAGE_ACCOUNT_NAME = "check Account name"
     AZURE_STORAGE_ACCOUNT_KEY = "check Account key"
     AZURE_STORAGE_NAME = "check storage name"
     PAPAGO_API_ID = 'check papago api id'
     PAPAGO_API_SECRET = 'check papago api secret'
 
-#model, config files download and unzip
+# model, config files download and unzip
 try:
     FILE_SERVICE = FileService(account_name=AZURE_STORAGE_ACCOUNT_NAME, account_key=AZURE_STORAGE_ACCOUNT_KEY)
     logging.debug("MODEL_ABS_PATH : %s", MODEL_ABS_PATH)
     if os.path.exists(MODEL_ABS_PATH):
         shutil.rmtree(MODEL_ABS_PATH)
 
-    FILE_SERVICE.get_file_to_path(AZURE_STORAGE_NAME, constant.STORAGE_BERT_SENTIMENT_DIR, constant.MODEL_ZIP_NAME, MODEL_ZIP_ABS_PATH)
-    FILE_SERVICE.get_file_to_path(AZURE_STORAGE_NAME, constant.STORAGE_BERT_SENTIMENT_DIR, constant.BERT_CONFIG_NAME, CONFIG_FILE_ABS_PATH)
+    FILE_SERVICE.get_file_to_path(AZURE_STORAGE_NAME, constant.STORAGE_BERT_SENTIMENT_DIR, constant.MODEL_ZIP_NAME,
+                                  MODEL_ZIP_ABS_PATH)
+    FILE_SERVICE.get_file_to_path(AZURE_STORAGE_NAME, constant.STORAGE_BERT_SENTIMENT_DIR, constant.BERT_CONFIG_NAME,
+                                  CONFIG_FILE_ABS_PATH)
     shutil.unpack_archive(MODEL_ZIP_ABS_PATH, extract_dir=DIRNAME)
 
 except Exception as e:
@@ -65,13 +58,13 @@ except Exception as e:
 
 # print(DIRNAME)
 
-pretrained_model_path = os.path.join(MODEL_ABS_PATH,constant.MODEL_BIN_NAME)
+pretrained_model_path = os.path.join(MODEL_ABS_PATH, constant.MODEL_BIN_NAME)
 # print(pretrained_model_path)
 
-config_path = os.path.join(DIRNAME,constant.BERT_CONFIG_NAME)
+config_path = os.path.join(DIRNAME, constant.BERT_CONFIG_NAME)
 # print(config_path)
 
-pretrained = torch.load(pretrained_model_path,map_location='cpu')
+pretrained = torch.load(pretrained_model_path, map_location='cpu')
 bert_config = BertConfig(config_path)
 bert_config.num_labels = 7
 
@@ -86,6 +79,7 @@ tokenizer, vocab = get_pretrained_model('etri')
 # 'angry', 'surprise', 'angry', 'sad', 'neutral', 'joy', 'disgust'
 obj = dict()
 emotion = ['scare', 'surprise', 'angry', 'sad', 'neutral', 'joy', 'disgust']
+
 
 def get_prediction(sentence):
     sentence = Datasets.normalize_string(sentence)
@@ -106,20 +100,18 @@ app = Flask(__name__)
 CORS(app, allow_headers=['x-requested-with'], origins='*', methods='POST, GET, PUT, DELETE, OPTIONS')
 app.config['JSON_AS_ASCII'] = False
 
+
 @app.route('/', methods=['POST'])
 def post():
     sentence = request.form['input']
-    # langCode = detector.detector(sentence)
     trans_result = translator.translator(sentence)
     max_out, result, sorted_result = get_prediction(trans_result)
     obj['prediction'] = {
-        # 'sentence': sentence,
-        # 'langCode' : langCode,
-        # 'story' : trans_result,
         'emotion': max_out,
         'data': result
     }
     return obj
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000)
