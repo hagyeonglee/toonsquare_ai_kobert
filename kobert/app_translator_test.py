@@ -101,12 +101,16 @@ CORS(app, allow_headers=['x-requested-with'], origins='*', methods='POST, GET, P
 @app.route('/', methods=['POST'])
 def post():
     sentence = request.form['input']
+    logging.info(sentence)
     trans_result = translator.translator(sentence)
+    logging.info(trans_result)
     max_out, result, sorted_result = get_prediction(trans_result)
     obj['prediction'] = {
+        'sentence': sentence,
         'emotion': max_out,
         'data': result
     }
+
     return obj
 
 
