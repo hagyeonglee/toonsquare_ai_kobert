@@ -96,7 +96,6 @@ def get_prediction(sentence):
 
 app = Flask(__name__)
 CORS(app, allow_headers=['x-requested-with'], origins='*', methods='POST, GET, PUT, DELETE, OPTIONS')
-app.config['JSON_AS_ASCII'] = False
 
 
 @app.route('/', methods=['POST'])
