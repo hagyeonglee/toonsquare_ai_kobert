@@ -15,6 +15,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from util import constant
 
 import translator
+import detector
 
 from azure.storage.file import FileService
 
@@ -101,12 +102,14 @@ CORS(app, allow_headers=['x-requested-with'], origins='*', methods='POST, GET, P
 @app.route('/', methods=['POST'])
 def post():
     sentence = request.form['input']
-    logging.info(sentence)
-    trans_result = translator.translator(sentence)
-    logging.info(trans_result)
-    max_out, result, sorted_result = get_prediction(trans_result)
+    langCode = detector.detector(sentence)
+    if (langCode != "ko"):
+        trans_result = translator.translator(sentence)
+        max_out, result, sorted_result = get_prediction(trans_result)
+    else:
+        max_out, result, sorted_result = get_prediction(sentence)
+
     obj['prediction'] = {
-        'sentence': sentence,
         'emotion': max_out,
         'data': result
     }
