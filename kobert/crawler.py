@@ -219,47 +219,9 @@ def number_comment_crawler(name, comments_number):
     driver.close()
     print('crawling finished')
     return comments
-
-    # id_num, weekday = find_id_weekday(name, t_names, t_IDs, t_weekdays, start_idx=random.randint(1,int(res)))
-    # # cnt = comments_number
-    #
-    # comments = []
-    # # proceed = -1  # 진행 상태 표시 위함, 처음에 0보다 작아야 0%가 표시 됨
-    #
-    # driver, _ = drive(base_url)  # driver만 먼저 열어 놓음. for문 돌면서 url만 바꿔줄 것임
-    # print(name+' 크롤링 진행중...')
-    #
-    # need_pagenum = int(comments_number/15)
-    # rest_pagenum = comments_number%15
-    #
-    # print(need_pagenum)
-    # print(rest_pagenum)
-    #
-    # res_list = []
-    # i = 0
-    # while i < need_pagenum+1:
-    #     print(i)
-    #     num = random.randint(1,int(res))
-    #     print(num)
-    #     res_list.append(num)
-    #     i += 1
-    # print(res_list)
-    #
-    # for k in range(1,len(res_list)):
-    #     x = res_list.pop()
-    #     print(x)
-    #     url = 'https://comic.naver.com/comment/comment.nhn?titleId={0}&no={1}#'.format(id_num, str(x))
-    #     time.sleep(1.5)
-    #     driver.get(url)
-    #     html = driver.page_source
-    #     soup = BeautifulSoup(html, 'html.parser')
-    #
-    #     comments += list(map(lambda x: x.text, soup.select('.u_cbox_contents')))
-    #
-    # driver.close()
-    # print('crawling finished')
-    # return comments
-#
+print("---------------------------------------")
+print(" 1 : input episode (all | number of episode)\n 2 : episode range \n 3 : number of comments")
+print("---------------------------------------")
 
 mode = int(input("원하는 크롤링 모드를 선택하세요 : "))
 
