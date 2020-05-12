@@ -182,51 +182,104 @@ def select_episode_comment_crawler(name, episode_start,episode_end):
 #
 
 #원하는 개의 웹툰의 best 댓글을 crawling하는 함수
-# def number_comment_crawler(name, comments_number):
-#     id_num, weekday = find_id_weekday(name, t_names, t_IDs, t_weekdays, start_idx=random.randint(1,res))
-#     cnt = comments_number
-#
-#     comments = []
-#     proceed = -1  # 진행 상태 표시 위함, 처음에 0보다 작아야 0%가 표시 됨
-#
-#     driver, _ = drive(base_url)  # driver만 먼저 열어 놓음. for문 돌면서 url만 바꿔줄 것임
-#     print(name+' 크롤링 진행중...')
-#     # for i in range(1, cnt + 1):
-#     for i in range(1, cnt + 1):
-#         percentage = int((i / cnt) * 100)
-#         if percentage % 10 == 0 and percentage > proceed:  # 진행상황 표시
-#             proceed = percentage
-#             print(proceed, '% 완료')
-#         url = 'https://comic.naver.com/comment/comment.nhn?titleId={0}&no={1}#'.format(id_num, str(i))
-#         # driver.implicitly_wait(3)
-#         time.sleep(1.5)
-#         driver.get(url)
-#         html = driver.page_source
-#         soup = BeautifulSoup(html, 'html.parser')
-#
-#         comments += list(map(lambda x: x.text, soup.select('.u_cbox_contents')))
-#
-#     driver.close()
-#     print('crawling finished')
-#     return comments
-# #
+def number_comment_crawler(name, comments_number):
+    id_num, weekday = find_id_weekday(name, t_names, t_IDs, t_weekdays, start_idx=random.randint(1, int(res)))
+    cnt = comments_number
+
+    need_pagenum = int(comments_number/15)+1
+    rest_pagenum = comments_number%15
+
+    comments = []
+    proceed = -1  # 진행 상태 표시 위함, 처음에 0보다 작아야 0%가 표시 됨
+
+    driver, _ = drive(base_url)  # driver만 먼저 열어 놓음. for문 돌면서 url만 바꿔줄 것임
+    print(name+' 크롤링 진행중...')
+    # for i in range(1, cnt + 1):
+    for i in range(1, need_pagenum + 1):
+        percentage = int((i / cnt) * 100)
+        if percentage % 10 == 0 and percentage > proceed:  # 진행상황 표시
+            proceed = percentage
+            # print(proceed, '% 완료')
+        url = 'https://comic.naver.com/comment/comment.nhn?titleId={0}&no={1}#'.format(id_num, str(random.randint(1, int(res))))
+        # driver.implicitly_wait(3)
+        time.sleep(1.5)
+        driver.get(url)
+        html = driver.page_source
+        soup = BeautifulSoup(html, 'html.parser')
+
+        comments += list(map(lambda x: x.text, soup.select('.u_cbox_contents')))
+        # while (len(comments)==comments_number):
+        j=1
+        for j in range(15-rest_pagenum):
+            comments.pop()
+            j += 1
+            # print(j)
 
 
-episode_num = input("원하는 에피소드 회차를 입력하세요 : ")
-# print(type(episode_num)) #str -> int()처리 필요
+    driver.close()
+    print('crawling finished')
+    return comments
 
-if(episode_num == ""):
-    episode_start = int(input("원하는 에피소드 회차를 입력하세요(시작) : "))
+    # id_num, weekday = find_id_weekday(name, t_names, t_IDs, t_weekdays, start_idx=random.randint(1,int(res)))
+    # # cnt = comments_number
+    #
+    # comments = []
+    # # proceed = -1  # 진행 상태 표시 위함, 처음에 0보다 작아야 0%가 표시 됨
+    #
+    # driver, _ = drive(base_url)  # driver만 먼저 열어 놓음. for문 돌면서 url만 바꿔줄 것임
+    # print(name+' 크롤링 진행중...')
+    #
+    # need_pagenum = int(comments_number/15)
+    # rest_pagenum = comments_number%15
+    #
+    # print(need_pagenum)
+    # print(rest_pagenum)
+    #
+    # res_list = []
+    # i = 0
+    # while i < need_pagenum+1:
+    #     print(i)
+    #     num = random.randint(1,int(res))
+    #     print(num)
+    #     res_list.append(num)
+    #     i += 1
+    # print(res_list)
+    #
+    # for k in range(1,len(res_list)):
+    #     x = res_list.pop()
+    #     print(x)
+    #     url = 'https://comic.naver.com/comment/comment.nhn?titleId={0}&no={1}#'.format(id_num, str(x))
+    #     time.sleep(1.5)
+    #     driver.get(url)
+    #     html = driver.page_source
+    #     soup = BeautifulSoup(html, 'html.parser')
+    #
+    #     comments += list(map(lambda x: x.text, soup.select('.u_cbox_contents')))
+    #
+    # driver.close()
+    # print('crawling finished')
+    # return comments
+#
+
+mode = int(input("원하는 크롤링 모드를 선택하세요 : "))
+
+if(mode==1):
+    episode_num = input("원하는 에피소드 회차를 입력하세요 : ")
     # print(type(episode_num)) #str -> int()처리 필요
-    episode_end = int(input("원하는 에피소드 회차를 입력하세요(끝) : "))
-    # print(type(episode_num)) #str -> int()처리 필요
-    comments = select_episode_comment_crawler(input_name,episode_start,episode_end)
-else:
     if (episode_num == 'all'):
         comments = all_comment_crawler(input_name)
     else:
         episode_num = int(episode_num)
         comments = episode_comment_crawler(input_name, episode_num)
+elif(mode==2):
+    episode_start = int(input("원하는 에피소드 회차를 입력하세요(시작) : "))
+    # print(type(episode_num)) #str -> int()처리 필요
+    episode_end = int(input("원하는 에피소드 회차를 입력하세요(끝) : "))
+    # print(type(episode_num)) #str -> int()처리 필요
+    comments = select_episode_comment_crawler(input_name,episode_start,episode_end)
+elif(mode==3):
+    comments_number = int(input("원하는 댓글 개수를 입력하세요 : "))
+    comments = number_comment_crawler(input_name, comments_number)
 
 
 #수집된 댓글 수
@@ -276,10 +329,18 @@ def get_prediction(sentence):
 os.chdir('./data/webtoon_comments')
 
 #추출한 댓글 저장 파일 이름 설정
-if (episode_num == ""):
-    file = open(input_name + "_ep." + str(episode_start) +" ~ "+ str(episode_end) + '_comments.csv', 'w', encoding='utf-8')
-else:
+# if (episode_num == ""):
+#     file = open(input_name + "_ep." + str(episode_start) +" ~ "+ str(episode_end) + '_comments.csv', 'w', encoding='utf-8')
+# else:
+#     file = open(input_name + "_ep." + str(episode_num) + '_comments.csv', 'w', encoding='utf-8')
+
+if(mode==1):
     file = open(input_name + "_ep." + str(episode_num) + '_comments.csv', 'w', encoding='utf-8')
+elif(mode==2):
+    file = open(input_name + "_ep." + str(episode_start) +" ~ "+ str(episode_end) + '_comments.csv', 'w', encoding='utf-8')
+elif(mode==3):
+    file = open(input_name + "_num." + str(comments_number) + '_comments.csv', 'w', encoding='utf-8')
+
 
 #csv 파일의 column 이름 설정
 index_num = 0
