@@ -83,6 +83,6 @@ Werkzeug
 widgetsnbextension
 wrapt==1.11.*
 zipp
-azure
+azure==4.0.0
 konlpy
 protobuf

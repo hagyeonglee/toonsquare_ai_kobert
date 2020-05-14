@@ -187,7 +187,10 @@ def number_comment_crawler(name, comments_number):
     cnt = comments_number
 
     need_pagenum = int(comments_number/15)+1
-    rest_pagenum = comments_number%15
+    rest_pagenum = int(comments_number % 15 )
+
+    print(need_pagenum)
+    print(rest_pagenum)
 
     comments = []
     proceed = -1  # 진행 상태 표시 위함, 처음에 0보다 작아야 0%가 표시 됨
@@ -209,10 +212,10 @@ def number_comment_crawler(name, comments_number):
 
         comments += list(map(lambda x: x.text, soup.select('.u_cbox_contents')))
         # while (len(comments)==comments_number):
-        j=1
-        for j in range(15-rest_pagenum):
-            comments.pop()
-            j += 1
+    j = 1
+    for j in range(15-rest_pagenum):
+        comments.pop()
+        j += 1
             # print(j)
 
 
